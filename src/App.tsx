@@ -5,14 +5,14 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 import Profiles from './pages/Profiles';
+import Notification from './components/Notification';
 import { useAppStore } from './stores/appStore';
 
 function App() {
-  const { currentPage } = useAppStore();
+  const { currentPage, notifications } = useAppStore();
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    // Load saved language preference
     const savedLang = localStorage.getItem('language');
     if (savedLang) {
       i18n.changeLanguage(savedLang);
@@ -20,9 +20,9 @@ function App() {
   }, [i18n]);
 
   const pageVariants = {
-    initial: { opacity: 0, x: 20 },
-    animate: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 },
+    initial: { opacity: 0, x: 30, scale: 0.98 },
+    animate: { opacity: 1, x: 0, scale: 1 },
+    exit: { opacity: 0, x: -30, scale: 0.98 },
   };
 
   const renderPage = () => {
@@ -40,17 +40,69 @@ function App() {
 
   return (
     <div className="flex h-screen bg-dark-950 overflow-hidden">
-      {/* Animated background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-radial from-primary-500/5 via-transparent to-transparent" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-gradient-radial from-blue-500/5 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiIgc3Ryb2tlPSJyZ2JhKDYsMTgyLDIxMiwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9nPjwvc3ZnPg==')] opacity-50" />
+        <div className="absolute inset-0 bg-mesh" />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
+
+        <motion.div
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 2,
+          }}
+          className="absolute -bottom-1/2 -right-1/4 w-[900px] h-[900px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+        />
+
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.15, 0.25, 0.15],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 4,
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
+
+        <div className="absolute inset-0 bg-grid opacity-50" />
+
+        <div className="noise-overlay" />
       </div>
 
-      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main content */}
       <main className="flex-1 overflow-hidden relative">
         <AnimatePresence mode="wait">
           <motion.div
@@ -59,16 +111,26 @@ function App() {
             initial="initial"
             animate="animate"
             exit="exit"
-            transition={{ duration: 0.2, ease: 'easeOut' }}
+            transition={{
+              duration: 0.35,
+              ease: [0.4, 0, 0.2, 1],
+            }}
             className="h-full"
           >
             {renderPage()}
           </motion.div>
         </AnimatePresence>
       </main>
+
+      <div className="fixed bottom-4 right-4 z-50 space-y-2">
+        <AnimatePresence>
+          {notifications.map((notification) => (
+            <Notification key={notification.id} {...notification} />
+          ))}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
 
 export default App;
-

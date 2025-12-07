@@ -4,7 +4,9 @@ import { persist } from 'zustand/middleware';
 export interface Device {
   id: string;
   name: string;
-  status: string;
+  status: 'online' | 'offline' | 'connecting';
+  type?: 'usb' | 'wireless';
+  model?: string;
 }
 
 export interface ScrcpyConfig {
@@ -30,37 +32,47 @@ export interface Profile {
   config: ScrcpyConfig;
 }
 
+export interface Notification {
+  id: string;
+  type: 'success' | 'error' | 'warning' | 'info';
+  title: string;
+  message?: string;
+}
+
 interface AppState {
-  // Navigation
   currentPage: 'dashboard' | 'settings' | 'profiles';
   setCurrentPage: (page: 'dashboard' | 'settings' | 'profiles') => void;
 
-  // Devices
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: (collapsed: boolean) => void;
+  toggleSidebar: () => void;
+
   devices: Device[];
   setDevices: (devices: Device[]) => void;
   selectedDevice: Device | null;
   setSelectedDevice: (device: Device | null) => void;
 
-  // scrcpy state
   isRunning: boolean;
   setIsRunning: (running: boolean) => void;
   isRecording: boolean;
   setIsRecording: (recording: boolean) => void;
 
-  // Configuration
   config: ScrcpyConfig;
   setConfig: (config: Partial<ScrcpyConfig>) => void;
   resetConfig: () => void;
 
-  // Profiles
   profiles: Profile[];
   addProfile: (profile: Profile) => void;
   removeProfile: (id: string) => void;
   updateProfile: (id: string, profile: Partial<Profile>) => void;
 
-  // Theme
   theme: 'dark' | 'light';
   setTheme: (theme: 'dark' | 'light') => void;
+
+  notifications: Notification[];
+  addNotification: (notification: Omit<Notification, 'id'>) => void;
+  removeNotification: (id: string) => void;
+  clearNotifications: () => void;
 }
 
 const defaultConfig: ScrcpyConfig = {
@@ -123,11 +135,13 @@ const defaultProfiles: Profile[] = [
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      // Navigation
       currentPage: 'dashboard',
       setCurrentPage: (page) => set({ currentPage: page }),
 
-      // Devices
+      sidebarCollapsed: false,
+      setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
+      toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+
       devices: [],
       setDevices: (devices) => set({ devices }),
       selectedDevice: null,
@@ -137,19 +151,16 @@ export const useAppStore = create<AppState>()(
           config: { ...state.config, device_id: device?.id || '' },
         })),
 
-      // scrcpy state
       isRunning: false,
       setIsRunning: (running) => set({ isRunning: running }),
       isRecording: false,
       setIsRecording: (recording) => set({ isRecording: recording }),
 
-      // Configuration
       config: defaultConfig,
       setConfig: (newConfig) =>
         set((state) => ({ config: { ...state.config, ...newConfig } })),
       resetConfig: () => set({ config: defaultConfig }),
 
-      // Profiles
       profiles: defaultProfiles,
       addProfile: (profile) =>
         set((state) => ({ profiles: [...state.profiles, profile] })),
@@ -164,12 +175,25 @@ export const useAppStore = create<AppState>()(
           ),
         })),
 
-      // Theme
       theme: 'dark',
       setTheme: (theme) => {
         document.documentElement.classList.toggle('dark', theme === 'dark');
         set({ theme });
       },
+
+      notifications: [],
+      addNotification: (notification) =>
+        set((state) => ({
+          notifications: [
+            ...state.notifications,
+            { ...notification, id: `notif-${Date.now()}-${Math.random().toString(36).substr(2, 9)}` },
+          ],
+        })),
+      removeNotification: (id) =>
+        set((state) => ({
+          notifications: state.notifications.filter((n) => n.id !== id),
+        })),
+      clearNotifications: () => set({ notifications: [] }),
     }),
     {
       name: 'regui-scrpy-storage',
@@ -177,8 +201,8 @@ export const useAppStore = create<AppState>()(
         config: state.config,
         profiles: state.profiles,
         theme: state.theme,
+        sidebarCollapsed: state.sidebarCollapsed,
       }),
     }
   )
 );
-

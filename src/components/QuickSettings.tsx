@@ -9,6 +9,7 @@ import {
   Coffee,
   Maximize,
   Square,
+  Settings2,
 } from 'lucide-react';
 import { useAppStore } from '../stores/appStore';
 
@@ -41,14 +42,19 @@ export default function QuickSettings() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 }}
-      className="card card-hover space-y-4"
+      transition={{ delay: 0.4, duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      className="card card-hover space-y-5"
     >
-      <h3 className="font-semibold text-dark-100">Quick Settings</h3>
+      <div className="flex items-center gap-2 pb-2 border-b border-dark-700/50">
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-dark-800/50 text-primary-400">
+          <Settings2 className="w-4 h-4" />
+        </div>
+        <h3 className="font-semibold text-dark-100">Quick Settings</h3>
+      </div>
 
       {/* Resolution */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-dark-300">
+      <div className="space-y-3">
+        <label className="flex items-center gap-2 text-sm font-medium text-dark-300">
           <Monitor className="w-4 h-4 text-primary-400" />
           {t('settings.maxSize')}
         </label>
@@ -57,21 +63,35 @@ export default function QuickSettings() {
             <button
               key={option.value}
               onClick={() => setConfig({ max_size: option.value })}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                config.max_size === option.value
-                  ? 'bg-primary-500/20 text-primary-400 border border-primary-500/50'
-                  : 'bg-dark-800/50 text-dark-300 border border-dark-600/50 hover:border-primary-500/30'
-              }`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden group ${config.max_size === option.value
+                  ? 'text-primary-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                  : 'text-dark-400 hover:text-dark-200'
+                }`}
+              style={{
+                background: config.max_size === option.value
+                  ? 'rgba(6, 182, 212, 0.15)'
+                  : 'rgba(15, 23, 42, 0.6)',
+                border: config.max_size === option.value
+                  ? '1px solid rgba(6, 182, 212, 0.4)'
+                  : '1px solid rgba(71, 85, 105, 0.4)',
+              }}
             >
-              {option.label}
+              {config.max_size === option.value && (
+                <motion.div
+                  layoutId="resActive"
+                  className="absolute inset-0 bg-primary-400/10"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{option.label}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* FPS */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-dark-300">
+      <div className="space-y-3">
+        <label className="flex items-center gap-2 text-sm font-medium text-dark-300">
           <Gauge className="w-4 h-4 text-primary-400" />
           {t('settings.maxFps')}
         </label>
@@ -80,21 +100,36 @@ export default function QuickSettings() {
             <button
               key={option.value}
               onClick={() => setConfig({ max_fps: option.value })}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                config.max_fps === option.value
-                  ? 'bg-primary-500/20 text-primary-400 border border-primary-500/50'
-                  : 'bg-dark-800/50 text-dark-300 border border-dark-600/50 hover:border-primary-500/30'
-              }`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden ${config.max_fps === option.value
+                  ? 'text-primary-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                  : 'text-dark-400 hover:text-dark-200'
+                }`}
+              style={{
+                background: config.max_fps === option.value
+                  ? 'rgba(6, 182, 212, 0.15)'
+                  : 'rgba(15, 23, 42, 0.6)',
+                border: config.max_fps === option.value
+                  ? '1px solid rgba(6, 182, 212, 0.4)'
+                  : '1px solid rgba(71, 85, 105, 0.4)',
+              }}
             >
-              {option.label}
+              {config.max_fps === option.value && (
+                <motion.div
+                  layoutId="fpsActive"
+                  className="absolute inset-0 bg-primary-400/10"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{option.label}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Codec */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-sm text-dark-300">
+      <div className="space-y-3">
+        <label className="flex items-center gap-2 text-sm font-medium text-dark-300">
+          <Settings2 className="w-4 h-4 text-primary-400" />
           {t('settings.codec')}
         </label>
         <div className="flex gap-2">
@@ -102,20 +137,34 @@ export default function QuickSettings() {
             <button
               key={option.value}
               onClick={() => setConfig({ video_codec: option.value })}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                config.video_codec === option.value
-                  ? 'bg-primary-500/20 text-primary-400 border border-primary-500/50'
-                  : 'bg-dark-800/50 text-dark-300 border border-dark-600/50 hover:border-primary-500/30'
-              }`}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 relative overflow-hidden ${config.video_codec === option.value
+                  ? 'text-primary-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                  : 'text-dark-400 hover:text-dark-200'
+                }`}
+              style={{
+                background: config.video_codec === option.value
+                  ? 'rgba(6, 182, 212, 0.15)'
+                  : 'rgba(15, 23, 42, 0.6)',
+                border: config.video_codec === option.value
+                  ? '1px solid rgba(6, 182, 212, 0.4)'
+                  : '1px solid rgba(71, 85, 105, 0.4)',
+              }}
             >
-              {option.label}
+              {config.video_codec === option.value && (
+                <motion.div
+                  layoutId="codecActive"
+                  className="absolute inset-0 bg-primary-400/10"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{option.label}</span>
             </button>
           ))}
         </div>
       </div>
 
       {/* Toggle options */}
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-3 pt-2">
         <ToggleButton
           active={config.audio_enabled}
           onClick={() => setConfig({ audio_enabled: !config.audio_enabled })}
@@ -170,15 +219,26 @@ function ToggleButton({ active, onClick, icon: Icon, label }: ToggleButtonProps)
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className={`flex items-center gap-2 p-3 rounded-lg text-sm font-medium transition-all ${
-        active
-          ? 'bg-primary-500/20 text-primary-400 border border-primary-500/50'
-          : 'bg-dark-800/50 text-dark-400 border border-dark-600/50 hover:text-dark-300 hover:border-primary-500/30'
-      }`}
+      className={`flex items-center gap-3 p-3 rounded-xl text-sm font-medium transition-all duration-200 ${active
+          ? 'text-primary-300 shadow-[0_0_15px_rgba(6,182,212,0.15)]'
+          : 'text-dark-400 hover:text-dark-200'
+        }`}
+      style={{
+        background: active
+          ? 'linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(6, 182, 212, 0.05) 100%)'
+          : 'rgba(15, 23, 42, 0.4)',
+        border: active
+          ? '1px solid rgba(6, 182, 212, 0.3)'
+          : '1px solid rgba(71, 85, 105, 0.3)',
+      }}
     >
-      <Icon className="w-4 h-4" />
+      <div
+        className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-300 ${active ? 'bg-primary-500/20' : 'bg-dark-800/50'
+          }`}
+      >
+        <Icon className={`w-4 h-4 ${active ? 'text-primary-400' : 'text-dark-500'}`} />
+      </div>
       <span className="truncate">{label}</span>
     </motion.button>
   );
 }
-
