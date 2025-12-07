@@ -1,0 +1,26 @@
+[package]
+name = "regui-scrpy"
+version = "1.0.0"
+description = "Modern GUI for scrcpy"
+authors = ["damnrightt"]
+license = "Apache-2.0"
+repository = "https://github.com/damnrightt/re-guiscrpy"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
+

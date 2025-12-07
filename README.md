@@ -1,225 +1,199 @@
-**This GitHub repo (<https://github.com/Genymobile/scrcpy>) is the only official
-source for the project. Do not download releases from random websites, even if
-their name contains `scrcpy`.**
+# ReGUI Scrpy
 
-# scrcpy (v3.3.3)
+<div align="center">
 
-<img src="app/data/icon.svg" width="128" height="128" alt="scrcpy" align="right" />
+![ReGUI Scrpy](https://img.shields.io/badge/ReGUI-Scrpy-06b6d4?style=for-the-badge&logo=android&logoColor=white)
+![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/license-Apache--2.0-green?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey?style=for-the-badge)
 
-_pronounced "**scr**een **c**o**py**"_
+**Modern GUI for scrcpy - Mirror your Android device with style**
 
-This application mirrors Android devices (video and audio) connected via USB or
-[TCP/IP](doc/connection.md#tcpip-wireless) and allows control using the
-computer's keyboard and mouse. It does not require _root_ access or an app
-installed on the device. It works on _Linux_, _Windows_, and _macOS_.
+*Android cihazınızı şık bir arayüzle yansıtın*
 
-![screenshot](assets/screenshot-debian-600.jpg)
+[English](#english) | [Türkçe](#türkçe)
 
-It focuses on:
+</div>
 
- - **lightness**: native, displays only the device screen
- - **performance**: 30~120fps, depending on the device
- - **quality**: 1920×1080 or above
- - **low latency**: [35~70ms][lowlatency]
- - **low startup time**: ~1 second to display the first image
- - **non-intrusiveness**: nothing is left installed on the Android device
- - **user benefits**: no account, no ads, no internet required
- - **freedom**: free and open source software
+---
 
-[lowlatency]: https://github.com/Genymobile/scrcpy/pull/646
+## English
 
-Its features include:
- - [audio forwarding](doc/audio.md) (Android 11+)
- - [recording](doc/recording.md)
- - [virtual display](doc/virtual_display.md)
- - mirroring with [Android device screen off](doc/device.md#turn-screen-off)
- - [copy-paste](doc/control.md#copy-paste) in both directions
- - [configurable quality](doc/video.md)
- - [camera mirroring](doc/camera.md) (Android 12+)
- - [mirroring as a webcam (V4L2)](doc/v4l2.md) (Linux-only)
- - physical [keyboard][hid-keyboard] and [mouse][hid-mouse] simulation (HID)
- - [gamepad](doc/gamepad.md) support
- - [OTG mode](doc/otg.md)
- - and more…
+### About
 
-[hid-keyboard]: doc/keyboard.md#physical-keyboard-simulation
-[hid-mouse]: doc/mouse.md#physical-mouse-simulation
+ReGUI Scrpy is a modern, beautiful, and feature-rich graphical user interface for [scrcpy](https://github.com/Genymobile/scrcpy). Built with Tauri and React, it provides a seamless experience for mirroring and controlling your Android device.
 
-## Prerequisites
+### Features
 
-The Android device requires at least API 21 (Android 5.0).
+- 🎨 **Modern UI** - Beautiful dark theme with smooth animations
+- 📱 **Device Management** - Auto-detect connected devices via USB and wireless
+- ⚡ **Quick Controls** - Start/stop mirroring with one click
+- 🎮 **Preset Profiles** - Gaming, Streaming, Recording presets
+- 📸 **Screenshot** - Capture screenshots instantly
+- 🎥 **Recording** - Record your device screen
+- 🌐 **Multi-language** - English and Turkish support
+- ⚙️ **Full Configuration** - Resolution, FPS, bitrate, codec, and more
 
-[Audio forwarding](doc/audio.md) is supported for API >= 30 (Android 11+).
+### Installation
 
-Make sure you [enabled USB debugging][enable-adb] on your device(s).
+#### Prerequisites
 
-[enable-adb]: https://developer.android.com/studio/debug/dev-options#enable
+- [Node.js](https://nodejs.org/) (v18 or later)
+- [Rust](https://rustup.rs/) (for Tauri)
+- [ADB](https://developer.android.com/tools/adb) (Android Debug Bridge)
+- [scrcpy](https://github.com/Genymobile/scrcpy) installed and in PATH
 
-On some devices (especially Xiaomi), you might get the following error:
+#### Build from Source
 
+```bash
+# Clone the repository
+git clone https://github.com/damnrightt/re-guiscrpy.git
+cd re-guiscrpy
+
+# Install dependencies
+npm install
+
+# Run in development mode
+npm run tauri dev
+
+# Build for production
+npm run tauri build
 ```
-Injecting input events requires the caller (or the source of the instrumentation, if any) to have the INJECT_EVENTS permission.
+
+### Usage
+
+1. Connect your Android device via USB (enable USB debugging)
+2. Launch ReGUI Scrpy
+3. Select your device from the list
+4. Click "Start Mirror" to begin
+
+#### Wireless Connection
+
+1. Connect your device via USB first
+2. Run `adb tcpip 5555` in terminal
+3. Disconnect USB
+4. Enter your device's IP address in the app
+5. Click "Connect"
+
+### Configuration Options
+
+| Option | Description |
+|--------|-------------|
+| Max Resolution | Limit the video resolution (720p, 1080p, 1440p, 4K) |
+| Max FPS | Limit frame rate (30, 60, 90, 120) |
+| Bitrate | Video bitrate (2M - 24M) |
+| Video Codec | H.264, H.265, AV1 |
+| Audio | Enable/disable audio forwarding |
+| Show Touches | Display touch indicators on mirror |
+| Stay Awake | Keep device awake while mirroring |
+| Fullscreen | Start in fullscreen mode |
+
+---
+
+## Türkçe
+
+### Hakkında
+
+ReGUI Scrpy, [scrcpy](https://github.com/Genymobile/scrcpy) için modern, güzel ve özellik dolu bir grafiksel kullanıcı arayüzüdür. Tauri ve React ile oluşturulmuş olup, Android cihazınızı yansıtmak ve kontrol etmek için kusursuz bir deneyim sunar.
+
+### Özellikler
+
+- 🎨 **Modern Arayüz** - Akıcı animasyonlarla güzel koyu tema
+- 📱 **Cihaz Yönetimi** - USB ve kablosuz bağlı cihazları otomatik algılama
+- ⚡ **Hızlı Kontroller** - Tek tıkla yansıtmayı başlat/durdur
+- 🎮 **Hazır Profiller** - Oyun, İzleme, Kayıt ön ayarları
+- 📸 **Ekran Görüntüsü** - Anında ekran görüntüsü al
+- 🎥 **Kayıt** - Cihaz ekranını kaydet
+- 🌐 **Çoklu Dil** - Türkçe ve İngilizce desteği
+- ⚙️ **Tam Yapılandırma** - Çözünürlük, FPS, bitrate, codec ve daha fazlası
+
+### Kurulum
+
+#### Gereksinimler
+
+- [Node.js](https://nodejs.org/) (v18 veya üzeri)
+- [Rust](https://rustup.rs/) (Tauri için)
+- [ADB](https://developer.android.com/tools/adb) (Android Debug Bridge)
+- PATH'e eklenmiş [scrcpy](https://github.com/Genymobile/scrcpy)
+
+#### Kaynaktan Derleme
+
+```bash
+# Repoyu klonla
+git clone https://github.com/damnrightt/re-guiscrpy.git
+cd re-guiscrpy
+
+# Bağımlılıkları yükle
+npm install
+
+# Geliştirme modunda çalıştır
+npm run tauri dev
+
+# Üretim için derle
+npm run tauri build
 ```
 
-In that case, you need to enable [an additional option][control] `USB debugging
-(Security Settings)` (this is an item different from `USB debugging`) to control
-it using a keyboard and mouse. Rebooting the device is necessary once this
-option is set.
+### Kullanım
 
-[control]: https://github.com/Genymobile/scrcpy/issues/70#issuecomment-373286323
+1. Android cihazınızı USB ile bağlayın (USB hata ayıklamayı etkinleştirin)
+2. ReGUI Scrpy'yi başlatın
+3. Listeden cihazınızı seçin
+4. Başlatmak için "Yansıtmayı Başlat"a tıklayın
 
-Note that USB debugging is not required to run scrcpy in [OTG mode](doc/otg.md).
+#### Kablosuz Bağlantı
 
+1. Önce cihazınızı USB ile bağlayın
+2. Terminalde `adb tcpip 5555` komutunu çalıştırın
+3. USB'yi çıkarın
+4. Uygulamada cihazınızın IP adresini girin
+5. "Bağlan"a tıklayın
 
-## Get the app
+### Yapılandırma Seçenekleri
 
- - [Linux](doc/linux.md)
- - [Windows](doc/windows.md) (read [how to run](doc/windows.md#run))
- - [macOS](doc/macos.md)
+| Seçenek | Açıklama |
+|---------|----------|
+| Maks Çözünürlük | Video çözünürlüğünü sınırla (720p, 1080p, 1440p, 4K) |
+| Maks FPS | Kare hızını sınırla (30, 60, 90, 120) |
+| Bit Hızı | Video bit hızı (2M - 24M) |
+| Video Kodeki | H.264, H.265, AV1 |
+| Ses | Ses iletimini etkinleştir/devre dışı bırak |
+| Dokunuşları Göster | Yansıtmada dokunma göstergelerini görüntüle |
+| Uyanık Tut | Yansıtma sırasında cihazı uyanık tut |
+| Tam Ekran | Tam ekran modunda başlat |
 
+---
 
-## Must-know tips
+## Tech Stack
 
- - [Reducing resolution](doc/video.md#size) may greatly improve performance
-   (`scrcpy -m1024`)
- - [_Right-click_](doc/mouse.md#mouse-bindings) triggers `BACK`
- - [_Middle-click_](doc/mouse.md#mouse-bindings) triggers `HOME`
- - <kbd>Alt</kbd>+<kbd>f</kbd> toggles [fullscreen](doc/window.md#fullscreen)
- - There are many other [shortcuts](doc/shortcuts.md)
+- **Framework**: [Tauri](https://tauri.app/) v2 (Rust backend)
+- **Frontend**: [React](https://react.dev/) 18 + TypeScript
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **State**: [Zustand](https://zustand-demo.pmnd.rs/)
+- **i18n**: [react-i18next](https://react.i18next.com/)
 
+## Screenshots
 
-## Usage examples
+*Screenshots coming soon...*
 
-There are a lot of options, [documented](#user-documentation) in separate pages.
-Here are just some common examples.
+## Contributing
 
- - Capture the screen in H.265 (better quality), limit the size to 1920, limit
-   the frame rate to 60fps, disable audio, and control the device by simulating
-   a physical keyboard:
-
-    ```bash
-    scrcpy --video-codec=h265 --max-size=1920 --max-fps=60 --no-audio --keyboard=uhid
-    scrcpy --video-codec=h265 -m1920 --max-fps=60 --no-audio -K  # short version
-    ```
-
- - Start VLC in a new virtual display (separate from the device display):
-
-    ```bash
-    scrcpy --new-display=1920x1080 --start-app=org.videolan.vlc
-    ```
-
- - Record the device camera in H.265 at 1920x1080 (and microphone) to an MP4
-   file:
-
-    ```bash
-    scrcpy --video-source=camera --video-codec=h265 --camera-size=1920x1080 --record=file.mp4
-    ```
-
- - Capture the device front camera and expose it as a webcam on the computer (on
-   Linux):
-
-    ```bash
-    scrcpy --video-source=camera --camera-size=1920x1080 --camera-facing=front --v4l2-sink=/dev/video2 --no-playback
-    ```
-
- - Control the device without mirroring by simulating a physical keyboard and
-   mouse (USB debugging not required):
-
-    ```bash
-    scrcpy --otg
-    ```
-
- - Control the device using gamepad controllers plugged into the computer:
-
-    ```bash
-    scrcpy --gamepad=uhid
-    scrcpy -G  # short version
-    ```
-
-## User documentation
-
-The application provides a lot of features and configuration options. They are
-documented in the following pages:
-
- - [Connection](doc/connection.md)
- - [Video](doc/video.md)
- - [Audio](doc/audio.md)
- - [Control](doc/control.md)
- - [Keyboard](doc/keyboard.md)
- - [Mouse](doc/mouse.md)
- - [Gamepad](doc/gamepad.md)
- - [Device](doc/device.md)
- - [Window](doc/window.md)
- - [Recording](doc/recording.md)
- - [Virtual display](doc/virtual_display.md)
- - [Tunnels](doc/tunnels.md)
- - [OTG](doc/otg.md)
- - [Camera](doc/camera.md)
- - [Video4Linux](doc/v4l2.md)
- - [Shortcuts](doc/shortcuts.md)
-
-
-## Resources
-
- - [FAQ](FAQ.md)
- - [Translations][wiki] (not necessarily up to date)
- - [Build instructions](doc/build.md)
- - [Developers](doc/develop.md)
-
-[wiki]: https://github.com/Genymobile/scrcpy/wiki
-
-
-## Articles
-
-- [Introducing scrcpy][article-intro]
-- [Scrcpy now works wirelessly][article-tcpip]
-- [Scrcpy 2.0, with audio][article-scrcpy2]
-
-[article-intro]: https://blog.rom1v.com/2018/03/introducing-scrcpy/
-[article-tcpip]: https://www.genymotion.com/blog/open-source-project-scrcpy-now-works-wirelessly/
-[article-scrcpy2]: https://blog.rom1v.com/2023/03/scrcpy-2-0-with-audio/
-
-## Contact
-
-You can open an [issue] for bug reports, feature requests or general questions.
-
-For bug reports, please read the [FAQ](FAQ.md) first, you might find a solution
-to your problem immediately.
-
-[issue]: https://github.com/Genymobile/scrcpy/issues
-
-You can also use:
-
- - Reddit: [`r/scrcpy`](https://www.reddit.com/r/scrcpy)
- - BlueSky: [`@scrcpy.bsky.social`](https://bsky.app/profile/scrcpy.bsky.social)
- - Twitter: [`@scrcpy_app`](https://twitter.com/scrcpy_app)
-
-
-## Donate
-
-I'm [@rom1v](https://github.com/rom1v), the author and maintainer of _scrcpy_.
-
-If you appreciate this application, you can [support my open source
-work][donate]:
- - [GitHub Sponsors](https://github.com/sponsors/rom1v)
- - [Liberapay](https://liberapay.com/rom1v/)
- - [PayPal](https://paypal.me/rom2v)
-
-[donate]: https://blog.rom1v.com/about/#support-my-open-source-work
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-    Copyright (C) 2018 Genymobile
-    Copyright (C) 2018-2025 Romain Vimont
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+## Credits
 
-        http://www.apache.org/licenses/LICENSE-2.0
+- [scrcpy](https://github.com/Genymobile/scrcpy) by Genymobile - The amazing tool that makes this possible
+- [Tauri](https://tauri.app/) - For the lightweight desktop framework
+- [React](https://react.dev/) - For the UI library
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+---
+
+<div align="center">
+
+Made with ❤️ by [damnrightt](https://github.com/damnrightt)
+
+</div>
