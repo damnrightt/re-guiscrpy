@@ -1,6 +1,6 @@
 {
   "name": "regui-scrpy",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Modern GUI for scrcpy - Mirror your Android device with style",
   "type": "module",
   "scripts": {
