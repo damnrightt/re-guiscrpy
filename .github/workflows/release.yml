@@ -27,6 +27,8 @@ jobs:
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
 
       - name: Install dependencies (Linux)
         if: matrix.platform == 'ubuntu-22.04'
@@ -47,3 +49,31 @@ jobs:
           releaseBody: 'See the assets to download this version and install.'
           releaseDraft: false
           prerelease: false
+
+      - name: Create Portable Zip (Windows)
+        if: matrix.platform == 'windows-latest'
+        shell: powershell
+        run: |
+          # 1. Download scrcpy binary
+          Invoke-WebRequest -Uri "https://github.com/Genymobile/scrcpy/releases/download/v2.7/scrcpy-win64-v2.7.zip" -OutFile "scrcpy.zip"
+          Expand-Archive scrcpy.zip -DestinationPath scrcpy-bin
+          
+          # 2. Prepare portable folder
+          $portableFolder = "ReGUI-Scrpy-Portable-${{ github.ref_name }}"
+          New-Item -ItemType Directory -Force -Path $portableFolder
+          
+          # 3. Copy scrcpy content to root of portable folder
+          Copy-Item "scrcpy-bin/scrcpy-win64-v2.7/*" -Destination $portableFolder -Recurse
+          
+          # 4. Copy our built exe to the portable folder
+          # Note: Tauri outputs to target/release/regui-scrpy.exe
+          Copy-Item "src-tauri/target/release/regui-scrpy.exe" -Destination "$portableFolder/ReGUI-Scrpy.exe"
+          
+          # 5. Create Zip
+          Compress-Archive -Path "$portableFolder" -DestinationPath "$portableFolder.zip"
+
+      - name: Upload Portable Zip
+        if: matrix.platform == 'windows-latest'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ReGUI-Scrpy-Portable-${{ github.ref_name }}.zip

@@ -10,7 +10,6 @@ interface DeviceCardProps {
 }
 
 export default function DeviceCard({ device, isSelected, onClick, index }: DeviceCardProps) {
-  const isOnline = device.status === 'online';
   const isConnecting = device.status === 'connecting';
   const isWireless = device.type === 'wireless' || device.id.includes(':');
 

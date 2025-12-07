@@ -20,11 +20,16 @@
 
 ### 📥 Download & Install
 
-You don't need to build from source! Just download the latest installer from the Releases page:
+**Recommended: Portable Version (No Installation Required)**
+Download the **`ReGUI-Scrpy-Portable-v1.0.0.zip`** from the releases page to get everything you need (included scrcpy) in a single package.
 
-**[👉 Download Latest Version (Windows .exe)](https://github.com/damnrightt/re-guiscrpy/releases/latest)**
+**[👉 Download Latest Version](https://github.com/damnrightt/re-guiscrpy/releases/latest)**
 
-> **Requirement**: Ensure you have [ADB](https://developer.android.com/tools/adb) and [scrcpy](https://github.com/Genymobile/scrcpy) installed on your system and added to your PATH.
+1. Download the Portable Zip.
+2. Extract it to a folder.
+3. Run `ReGUI-Scrpy.exe`.
+
+> **Note**: If you download the setup `.exe` or `.msi` instead, you must have [ADB](https://developer.android.com/tools/adb) and [scrcpy](https://github.com/Genymobile/scrcpy) installed on your system separately.
 
 ### ✨ Features
 
@@ -62,11 +67,16 @@ You don't need to build from source! Just download the latest installer from the
 
 ### 📥 İndir ve Kur
 
-Kaynak kodla uğraşmanıza gerek yok! En son sürümü Releases sayfasından indirebilirsiniz:
+**Önerilen: Taşınabilir Sürüm (Kurulum Gerektirmez)**
+Releases sayfasından **`ReGUI-Scrpy-Portable-v1.0.0.zip`** dosyasını indirin. İçerisinde ihtiyacınız olan her şey (scrcpy dahil) mevcuttur.
 
-**[👉 Son Sürümü İndir (Windows .exe)](https://github.com/damnrightt/re-guiscrpy/releases/latest)**
+**[👉 Son Sürümü İndir](https://github.com/damnrightt/re-guiscrpy/releases/latest)**
 
-> **Gereksinim**: Sisteminizde [ADB](https://developer.android.com/tools/adb) ve [scrcpy](https://github.com/Genymobile/scrcpy) kurulu ve PATH'e ekli olmalıdır.
+1. Portable Zip dosyasını indirin.
+2. Bir klasöre çıkartın.
+3. `ReGUI-Scrpy.exe` uygulamasını çalıştırın.
+
+> **Not**: Eğer kurulum dosyasını (.exe veya .msi) indirirseniz, sisteminizde ayrıca [ADB](https://developer.android.com/tools/adb) ve [scrcpy](https://github.com/Genymobile/scrcpy) kurulu olmalıdır.
 
 ### ✨ Özellikler
 

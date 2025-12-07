@@ -72,6 +72,15 @@ export function useScrcpy() {
     [selectedDevice]
   );
 
+  const connectWireless = useCallback(async (ip: string, port: string = '5555') => {
+    try {
+      const result = await invoke<string>('connect_wireless', { ip, port });
+      return { success: true, message: result };
+    } catch (error) {
+      return { success: false, message: String(error) };
+    }
+  }, []);
+
   return {
     isRunning,
     isRecording,
@@ -79,6 +88,7 @@ export function useScrcpy() {
     stopScrcpy,
     startRecording,
     takeScreenshot,
+    connectWireless,
   };
 }
 

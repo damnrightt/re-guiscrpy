@@ -7,7 +7,6 @@ import {
   Smartphone,
   Globe,
   ChevronLeft,
-  ChevronRight,
 } from 'lucide-react';
 import { useAppStore } from '../stores/appStore';
 
@@ -125,8 +124,8 @@ export default function Sidebar() {
               >
                 <Icon
                   className={`w-5 h-5 transition-colors duration-300 ${isActive
-                      ? 'text-primary-400'
-                      : 'text-dark-400 group-hover:text-dark-200'
+                    ? 'text-primary-400'
+                    : 'text-dark-400 group-hover:text-dark-200'
                     }`}
                 />
               </motion.div>
