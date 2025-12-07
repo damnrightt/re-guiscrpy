@@ -42,7 +42,6 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "resources": ["../release/**/*"],
     "windows": {
       "certificateThumbprint": null,
       "digestAlgorithm": "sha256",
@@ -67,4 +66,3 @@
     }
   }
 }
-
