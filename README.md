@@ -4,7 +4,8 @@
 
 ![ReGUI Scrpy Logo](https://img.shields.io/badge/ReGUI-Scrpy-06b6d4?style=for-the-badge&logo=android&logoColor=white)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/license-Apache--2.0-green?style=for-the-badge)
+![Downloads](https://img.shields.io/github/downloads/damnrightt/re-guiscrpy/total?style=for-the-badge&color=green)
+[![License](https://img.shields.io/badge/license-Apache--2.0-orange?style=for-the-badge)](LICENSE)
 
 **Modern, Beautiful, and Powerful GUI for scrcpy**
 *Mirror your Android device with style*
@@ -17,6 +18,14 @@
 
 ## English
 
+### 📥 Download & Install
+
+You don't need to build from source! Just download the latest installer from the Releases page:
+
+**[👉 Download Latest Version (Windows .exe)](https://github.com/damnrightt/re-guiscrpy/releases/latest)**
+
+> **Requirement**: Ensure you have [ADB](https://developer.android.com/tools/adb) and [scrcpy](https://github.com/Genymobile/scrcpy) installed on your system and added to your PATH.
+
 ### ✨ Features
 
 - 🎨 **Modern Glassmorphism UI** - Beautiful dark theme with smooth animations and neon effects
@@ -27,43 +36,37 @@
 - 🌐 **Multi-language** - Full support for English and Turkish
 - 🛠️ **Advanced Configuration** - Fine-tune bitrate, resolution, codecs (H.264, H.265, AV1), and more
 
-### 🚀 Tech Stack
+### 📖 How to Use
 
-- **Core**: [Tauri](https://tauri.app/) v2 (Rust backend)
-- **Frontend**: [React](https://react.dev/) 18 + TypeScript
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **State**: [Zustand](https://zustand-demo.pmnd.rs/)
+#### 1. Connect via USB
+1. Enable **USB Debugging** on your Android device settings.
+2. Connect your device via USB cable.
+3. The device should appear automatically in the "Devices" list.
+4. Select the device and click **Start Mirroring**.
 
-### 📦 Installation
+#### 2. Wireless Connection
+1. Connect your device via USB first.
+2. Go to the "Wireless Connect" section in Dashboard.
+3. Make sure your PC and phone are on the same Wi-Fi network.
+4. Click **Connect** (This runs `adb tcpip 5555`).
+5. Disconnect the USB cable.
+6. Enter your phone's local IP address (e.g., `192.168.1.X`) and click Connect.
 
-#### Prerequisites
-
-1. [Node.js](https://nodejs.org/) (v18 or later)
-2. [Rust](https://rustup.rs/) (for Tauri)
-3. [ADB](https://developer.android.com/tools/adb) (Android Debug Bridge)
-4. [scrcpy](https://github.com/Genymobile/scrcpy) (Must be in PATH)
-
-#### Build from Source
-
-```bash
-# Clone the repository
-git clone https://github.com/damnrightt/re-guiscrpy.git
-cd re-guiscrpy
-
-# Install dependencies
-npm install
-
-# Run in development mode
-npm run tauri dev
-
-# Build for production
-npm run tauri build
-```
+#### 3. Recording & Screenshots
+- Use the **Control Panel** to take instant screenshots or start screen recording.
+- Recordings are saved to your user folder by default.
 
 ---
 
 ## Türkçe
+
+### 📥 İndir ve Kur
+
+Kaynak kodla uğraşmanıza gerek yok! En son sürümü Releases sayfasından indirebilirsiniz:
+
+**[👉 Son Sürümü İndir (Windows .exe)](https://github.com/damnrightt/re-guiscrpy/releases/latest)**
+
+> **Gereksinim**: Sisteminizde [ADB](https://developer.android.com/tools/adb) ve [scrcpy](https://github.com/Genymobile/scrcpy) kurulu ve PATH'e ekli olmalıdır.
 
 ### ✨ Özellikler
 
@@ -75,24 +78,29 @@ npm run tauri build
 - 🌐 **Çoklu Dil** - Türkçe ve İngilizce tam destek
 - 🛠️ **Gelişmiş Yapılandırma** - Bit hızı, çözünürlük, kodekler (H.264, H.265, AV1) ve daha fazlası
 
-### 🚀 Teknolojiler
+### 📖 Nasıl Kullanılır?
 
-- **Çekirdek**: [Tauri](https://tauri.app/) v2 (Rust backend)
-- **Önyüz**: [React](https://react.dev/) 18 + TypeScript
-- **Stil**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animasyonlar**: [Framer Motion](https://www.framer.com/motion/)
-- **Durum Yönetimi**: [Zustand](https://zustand-demo.pmnd.rs/)
+#### 1. USB ile Bağlantı
+1. Android telefonunuzda **USB Hata Ayıklama** (USB Debugging) modunu açın.
+2. Telefonu USB ile bilgisayara bağlayın.
+3. Cihazınız "Cihazlar" listesinde otomatik olarak görünecektir.
+4. Cihazı seçin ve **Başlat** butonuna tıklayın.
 
-### 📦 Kurulum
+#### 2. Kablosuz Bağlantı
+1. Önce cihazı USB ile bağlayın.
+2. Dashboard'daki "Kablosuz Bağlantı" bölümüne gidin.
+3. PC ve telefonun aynı Wi-Fi ağında olduğundan emin olun.
+4. **Bağlan** butonuna tıklayın (Bu işlem `adb tcpip 5555` komutunu çalıştırır).
+5. USB kablosunu çıkarın.
+6. Telefonun IP adresini girin (örn: `192.168.1.X`) ve bağlanın.
 
-#### Gereksinimler
+#### 3. Kayıt ve Ekran Görüntüsü
+- **Kontrol Paneli** üzerinden anlık ekran görüntüsü alabilir veya video kaydı başlatabilirsiniz.
+- Kayıtlar varsayılan olarak kullanıcı klasörünüze kaydedilir.
 
-1. [Node.js](https://nodejs.org/) (v18 veya üzeri)
-2. [Rust](https://rustup.rs/) (Tauri için)
-3. [ADB](https://developer.android.com/tools/adb) (Android Debug Bridge)
-4. [scrcpy](https://github.com/Genymobile/scrcpy) (PATH'e eklenmiş olmalı)
+---
 
-#### Kaynaktan Derleme
+### 👨‍💻 Geliştiriciler İçin (Build from Source)
 
 ```bash
 # Depoyu klonlayın
@@ -105,11 +113,9 @@ npm install
 # Geliştirme modunda çalıştırın
 npm run tauri dev
 
-# Üretim için derleyin
+# Exe oluşturun
 npm run tauri build
 ```
-
----
 
 <div align="center">
 
